@@ -32,5 +32,5 @@ for santa in santa_givers:
       f.write ("\n\nMerry Christmas!")
       f.close()
       index= index +1
-      santa_givers.remove(santa)
+      del(name_addr[name])
       
