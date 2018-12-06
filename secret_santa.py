@@ -1,9 +1,16 @@
 import random
+import csv
 
-santa_givers= ['NAME']
+santa_givers= []
+name_addr = {}
 
-name_addr = {'NAME':'ADDRESS'}
+with open('santas.csv') as csv_file:
+   csv_reader = csv.reader(csv_file, delimiter= ',')
+   for row in csv_reader:
+      santa_givers. append(row[0])
+      name_addr.update({row[0]:row[1]})
 
+print  santa_givers
 
 keys = list(name_addr.keys())
 random.shuffle(keys)
@@ -11,15 +18,19 @@ random.shuffle(keys)
 index = 0
 
 for santa in santa_givers:
- file = santa + '.txt'
- f = open(file, 'w')
- name = keys[index]
- Address = name_addr[name]
- f.write ('Hello %s, ' % santa)
- f.write("\n\nYou are going to be buying for: %s" % name)
- f.write("\n\nShipping Address: %s" % Address)
- f.write ("\n\nMerry Christmas!")
- f.close()
- index= index +1
- 
-##MAKE SURE NO ONE IS GIVING TO THEMSELVES##
+   if santa is keys[index]:
+      keys = list(name_addr.keys())
+      random.shuffle(keys)
+   else:
+      file = santa + '.txt'
+      f = open(file, 'w')
+      name = keys[index]
+      address = name_addr[name]
+      f.write ('Hello %s, ' % santa)
+      f.write("\n\nYou are going to be buying for: %s" % name)
+      f.write("\n\nShipping Address: %s" % address)
+      f.write ("\n\nMerry Christmas!")
+      f.close()
+      index= index +1
+      santa_givers.remove(santa)
+      
